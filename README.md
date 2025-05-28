@@ -1,3 +1,5 @@
+Note: The program limits itself to finding around 100 product links.You can remove this limit by commenting the code. Also increase the workers and semaphore accroding to your resources and targets domain(e-commerce server) policies for high volume requests.
+
 WebCrawler Documentation
 This document provides a detailed explanation of the WebCrawler class, its methods, control flow, and how it achieves scalability and performance.
 
