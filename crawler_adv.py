@@ -204,10 +204,19 @@ class WebCrawler:
                 continue
         return False
 
+    def drain_queue(self):
+        while not self.queue.empty():
+            try:
+                self.queue.get_nowait()
+                self.queue.task_done()
+            except asyncio.QueueEmpty:
+                break
+
     async def process_url(self, url):
         if len(self.product_urls) >= 100:
             self.product_urls = list(set(self.product_urls))  # Ensure uniqueness
             print("⚠️ Product limit reached. Stopping further processing.")
+            self.drain_queue() 
             return
     
         if self.is_static_resource(url):
